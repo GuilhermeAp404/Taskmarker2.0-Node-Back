@@ -35,7 +35,7 @@ class UserControllers{
     async registerUser(req, res, next){
         const userData = req.body;
         try {
-            if(!userData.password.length>=8){
+            if(!userData.password.length>=8 && userData.password !=null){
                 throw new ValidationError("A senha precisa seguir o padrão imposto, por isso não foi possivel completar a ação");
             }
             userData.password = await bcrypt.hash(userData.password, 15);

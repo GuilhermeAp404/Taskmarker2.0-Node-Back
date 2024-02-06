@@ -23,6 +23,9 @@ function errorMiddleware(error, req, res, next) {
     if(error instanceof jwt.JsonWebTokenError){
         new JWTInvalidError().sendError(res);
     }
+    if(error instanceof TypeError){
+        new ValidationError().sendError(res);
+    }
     if(error instanceof BasicError){
         error.sendError(res);
     }
