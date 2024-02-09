@@ -9,13 +9,13 @@ const DatabaseError = require("../errors/DatabaseError.js");
 // eslint-disable-next-line no-unused-vars
 function errorMiddleware(error, req, res, next) {
     if(error instanceof Sequelize.ValidationError){
-        new ValidationError().sendError(res);
+        new ValidationError(error).sendError(res);
     }
     if(error instanceof Sequelize.DatabaseError){
         new DatabaseError().sendError(res);
     }
     if(error instanceof Sequelize.ConnectionError){
-        new BasicError("A conexão com o banco falhou tente novamente mais tarde", 500).sendError(res);
+        new BasicError(error.message, 500).sendError(res);
     }
     if(error instanceof jwt.TokenExpiredError){
         new JWTExpiredError().sendError(res);

@@ -1,11 +1,9 @@
-
 module.exports = {
     "development": {
         "username": "root",
         "password": null,
-        "database": "taskmarker",
+        "database": "database_test",
         "host": "127.0.0.1",
-        "port":"3312",
         "dialect": "mysql"
     },
     "test": {
@@ -16,7 +14,13 @@ module.exports = {
         "dialect": "mysql"
     },
     "production":{
-        "url": process.env.DATABASE_URL,
-        "dialect": "postgres"
+        "username":process.env.DB_USER,
+        "database":process.env.DB_STORAGE,
+        "password":process.env.DB_PaSS,
+        "host":process.env.DB_HOST,
+        "dialect": "postgres",
+        "dialectOptions":{
+            "ssl":true
+        }
     }
 };
