@@ -54,7 +54,7 @@ class UserControllers{
             const [, hash] = req.headers.authorization.split(" ");
             const [username, password] = Buffer.from(hash, "base64").toString().split(":");
 
-            const user = await this.userServices.getOne({username: username});
+            const user = await this.userServices.getOne({where: {username: username}});
             
             //verifica se o usuario foi encontrado
             if(user === null){
