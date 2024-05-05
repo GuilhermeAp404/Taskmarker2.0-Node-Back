@@ -14,14 +14,7 @@ class TaskControllers {
         const userId = req.user; 
         try {
             const taskList = await this.taskServices.getTasksFromUser(userId);
-            const tasks = taskList.map((task) =>{
-                task.start = moment.tz(task.start, "America/Sao_paulo").format();
-                task.end = moment.tz(task.end,  "America/Sao_paulo").format();
-                console.log(task.start);
-                console.log(task.end);
-                return task;
-            });
-            return res.status(200).json(tasks);
+            return res.status(200).json(taskList);
         } catch (error) {
             console.log(error);
             next(error);

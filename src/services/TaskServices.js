@@ -8,7 +8,9 @@ class TaskServices extends Services{
 
     async getTasksFromUser(id){
         const user = await this.userServices.getOneById(Number(id));
-        const userTaskList = await user.getTaskFromUser();
+        const userTaskList = await user.getTaskFromUser({
+            attributes:{exclude: ["userId", "createdAt", "updatedAt"]},
+        });
         return userTaskList;
     }
 }
