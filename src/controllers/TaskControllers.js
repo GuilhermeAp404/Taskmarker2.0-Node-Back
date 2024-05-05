@@ -3,6 +3,7 @@ const taskServices = new TaskServices();
 
 const BasicError = require("../errors/BasicError.js");
 const NotFoundError = require("../errors/NotFoundError.js");
+const moment = require("moment-timezone");
 
 class TaskControllers {
     constructor(){
@@ -13,8 +14,16 @@ class TaskControllers {
         const userId = req.user; 
         try {
             const taskList = await this.taskServices.getTasksFromUser(userId);
-            return res.status(200).json(taskList);
+            const tasks = taskList.map((task) =>{
+                task.start = moment.tz(task.start, "America/Sao_paulo").format();
+                task.end = moment.tz(task.end,  "America/Sao_paulo").format();
+                console.log(task.start);
+                console.log(task.end);
+                return task;
+            });
+            return res.status(200).json(tasks);
         } catch (error) {
+            console.log(error);
             next(error);
         }
     }
@@ -24,10 +33,10 @@ class TaskControllers {
         const dataTask = req.body;
         try {
             dataTask.userId = userId;
-            dataTask.start = new Date(dataTask.start);
-            dataTask.end = new Date(dataTask.end);
+            dataTask.start = moment.tz(dataTask.start,  "America/Sao_paulo").format();
+            dataTask.end = moment.tz(dataTask.end,  "America/Sao_paulo").format();
             if(dataTask.start>dataTask.end){
-                return res.status(400).json({message: "A data de inicio precisa ser menor que a data de termino"});
+                throw new BasicError("A data de inicio precisa ser menor que a data de termino", 403);
             }
             await this.taskServices.create(dataTask);
             return res.status(201).json({message: "Tarefa criada com sucesso!"});

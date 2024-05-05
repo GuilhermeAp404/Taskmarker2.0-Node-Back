@@ -2,9 +2,13 @@ module.exports = {
     "development": {
         "username": "root",
         "password": null,
-        "database": "database_test",
+        "database": "taskmarker",
         "host": "127.0.0.1",
-        "dialect": "mysql"
+        "port": "3312",
+        "dialect": "mysql",
+        "dialectOptions":{
+            "timezone":"-03:00"
+        }
     },
     "test": {
         "username": "root",
@@ -20,7 +24,8 @@ module.exports = {
         "host":process.env.DB_HOST,
         "dialect": "postgres",
         "dialectOptions":{
-            "ssl":true
+            "ssl":true,
+            "timezone":"America/Sao_Paulo"
         }
     }
 };
