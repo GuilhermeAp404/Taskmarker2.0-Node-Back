@@ -51,11 +51,15 @@ class UserControllers{
 
     async login(req, res, next){
         try {
-            if(!req.headers.authorization){
-                throw new BasicError("As credencias de acesso, são necessarias", 400);
+            const {username, password} = req.body;
+
+            if(!username){
+                throw new BasicError("O campo nome é necessário para o login");
             }
-            const [, hash] = req.headers.authorization.split(" ");
-            const [username, password] = Buffer.from(hash, "base64").toString().split(":");
+            
+            if(!password){
+                throw new BasicError("O campo senha é necessário para o login");
+            }
 
             const user = await this.userServices.getOne({where: {username: username}});
             
