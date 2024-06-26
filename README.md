@@ -117,5 +117,3 @@ Rota criada para atualizar informações dos usuários. As informações a segui
 ```
 
 
-Recebe dois números e retorna a sua soma.
-
