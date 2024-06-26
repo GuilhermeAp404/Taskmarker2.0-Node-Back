@@ -116,4 +116,70 @@ Rota criada para atualizar informações dos usuários. As informações a segui
 }
 ```
 
+## Documentação da API - Rotas de Tarefas
+
+### Rota para criar tarefas:
+```http
+  POST /tasks/create
+```
+
+Essa rota é utilizada para criar novas, as informações necessárias no corpo da requisição são:
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `title`      | `string` | **Obrigatório**. Título de tarefa|
+| `description`      | `string` | **Obrigatório**. Texto descrevendo a tarefa|
+| `start`      | `DATETIME` | **Obrigatório**. Data e hora de início da tarefa|
+| `end`      | `DATETIME` | **Obrigatório**. Data e hora de término  da tarefa|
+
+```
+{
+    "title":"",
+    "description":"",
+    "start":"",
+    "end":""
+}
+```
+**Atenção: Para utilizar esta rota, o usuário deve estar autenticado. O token retornado pela rota de login deve ser enviado no cabeçalho da requisição.**
+
+### Rota para trazer todas as tarefas do usuário:
+
+```http
+  GET /tasks/all
+```
+Essa rota busca todas as tarefas ligadas a um usuário.
+
+**Atenção: Para utilizar esta rota, o usuário deve estar autenticado. O token retornado pela rota de login deve ser enviado no cabeçalho da requisição.**
+
+
+### Rota para atualizar tarefas:
+```http
+  PUT /tasks/:id
+```
+Essa rota é atualizar para deletar tarefas de acordo com o ID enviado no parâmetro da requisição, o corpo pode receber:
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `title`      | `string` |Título de tarefa|
+| `description`      | `string` |Texto descrevendo a tarefa|
+| `start`      | `DATETIME` |Data e hora de início da tarefa|
+| `end`      | `DATETIME` |Data e hora de término  da tarefa|
+
+```
+{
+    "title":"",
+    "description":"",
+    "start":"",
+    "end":""
+}
+```
+**Atenção: Para utilizar esta rota, o usuário deve estar autenticado. O token retornado pela rota de login deve ser enviado no cabeçalho da requisição.**
+
+### Rota para deletar tarefas:
+```http
+  DELETE /tasks/:id
+```
+
+Essa rota é utilizada para deletar tarefas de acordo com o ID enviado no parâmetro da requisição. 
+
+**Atenção: Para utilizar esta rota, o usuário deve estar autenticado. O token retornado pela rota de login deve ser enviado no cabeçalho da requisição.**
 
