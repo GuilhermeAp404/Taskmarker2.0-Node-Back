@@ -24,9 +24,9 @@ Essa rota é utilizada para fazer o registro dos usuários. As informações a s
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `name` | `string` | **Obrigatório**. Nome completo do usuario.|
-| `username` | `string` | **Obrigatório**. Nome de usuario para login.|
-| `email` | `string` | **Obrigatório**. E-mail de contato do usuario.|
+| `name` | `string` | **Obrigatório**. Nome completo do usuário.|
+| `username` | `string` | **Obrigatório**. Nome de usuário para login.|
+| `email` | `string` | **Obrigatório**. E-mail de contato do usuário.|
 | `password` | `string` | **Obrigatório**.  Senha usada para login|
 
 ```
@@ -47,7 +47,7 @@ Essa rota é utilizada para fazer o login dos usuários. As informações a segu
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `username`      | `string` | **Obrigatório**. O nome de usuario enviado no registro|
+| `username`      | `string` | **Obrigatório**. O nome de usuário enviado no registro|
 | `password`      | `string` | **Obrigatório**. Senha utilizado no registro do usuário|
 
 
@@ -78,9 +78,9 @@ Rota criada para atualizar informações dos usuários. As informações a segui
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `name`      | `string` |O nome enviado para atualização|
-| `username`      | `string` |O nome de usuario enviado para atualização|
+| `username`      | `string` |O nome de usuário enviado para atualização|
 | `email`      | `string` |O e-mail enviado para atualização|
-| `password`      | `string` | **Obrigatório**. A senha do usuario e utilizada pra permitir a ação|
+| `password`      | `string` | **Obrigatório**. A senha do usuário e utilizada pra permitir a ação|
 | `passwordConfirm`      | `string` | **Obrigatório**. A confirmação da senha é utilizada para permitir a ação|
 
 **Atenção: Para utilizar esta rota, o usuário deve estar autenticado. O token retornado pela rota de login deve ser enviado no cabeçalho da requisição.**
@@ -104,7 +104,7 @@ Rota criada para atualizar informações dos usuários. As informações a segui
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `password`      | `string` | **Obrigatório**. A senha do usuario e utilizada pra permitir a ação|
+| `password`      | `string` | **Obrigatório**. A senha do usuário e utilizada pra permitir a ação|
 | `passwordConfirm`      | `string` | **Obrigatório**. A confirmação da senha é utilizada para permitir a ação|
 
 **Atenção: Para utilizar esta rota, o usuário deve estar autenticado. O token retornado pela rota de login deve ser enviado no cabeçalho da requisição.**
