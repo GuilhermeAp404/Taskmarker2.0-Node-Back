@@ -56,18 +56,18 @@ class UserControllers{
             if(!username){
                 throw new BasicError("O campo nome é necessário para o login");
             }
-            
+
             if(!password){
                 throw new BasicError("O campo senha é necessário para o login");
             }
 
             const user = await this.userServices.getOne({where: {username: username}});
-            
+
             //verifica se o usuario foi encontrado
             if(user === null){
                 throw new NotFoundError("Não existe um usuario cadastrado com esse nome");
             }
-            
+
             //verifica se a senha está correta
             const pwdMatch = await bcrypt.compare(password, user.password);
             if(!pwdMatch){
@@ -78,7 +78,7 @@ class UserControllers{
             const token = jwt.sign(
                 {
                     id: user.id,
-                }, 
+                },
                 process.env["PRIVATE_KEY"],
                 {expiresIn: "1h"}
             );
@@ -96,7 +96,7 @@ class UserControllers{
             if(!password || !passwordConfirm){
                 throw new BasicError("Você precisa da senha e da confirmação de senha para realizar essa função", 400);
             }
-            
+
             const user = await this.userServices.getOneById(Number(userId));
             if(user === null){
                 throw new NotFoundError();
@@ -109,7 +109,7 @@ class UserControllers{
             if(!pwdMatch){
                 throw new BasicError("A senha informada não combina com a do usuário atual", 403);
             }
-            
+
             //verifica quais os campos que vão ser alterados
             if(name){
                 userUpdate.name = name;
@@ -131,17 +131,17 @@ class UserControllers{
     async deleteUser(req, res, next){
         const userId = req.user;
         const {password, passwordConfirm} = req.body;
-        
+
         try {
             if(!password || !passwordConfirm){
                 throw new BasicError("Você precisa da senha e da confirmação de senha para realizar essa função", 400);
             }
-            
+
             const user = await this.userServices.getOneById(Number(userId));
             if(user === null){
                 throw new NotFoundError();
             }
-            
+
             if(password !== passwordConfirm){
                 throw new BasicError("A senhas não coincedem, tente novamente", 403);
             }
@@ -156,6 +156,6 @@ class UserControllers{
             next(error);
         }
     }
-}   
+}
 
 module.exports=UserControllers;

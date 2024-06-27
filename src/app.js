@@ -9,9 +9,7 @@ const app=express();
 
 app.use(helmet());
 routes(app);
-
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
 module.exports =app;
-
