@@ -116,7 +116,7 @@ Rota criada para atualizar informações dos usuários. As informações a segui
 }
 ```
 
-## Documentação da API - Rotas de Tarefas
+## Documentação da API - Rotas de Tarefa
 
 ### Rota para criar tarefas:
 ```http
