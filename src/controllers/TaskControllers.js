@@ -1,6 +1,6 @@
 const TaskServices = require("../services/TaskServices.js");
 const taskServices = new TaskServices();
-
+const{Op} = require("sequelize");
 const BasicError = require("../errors/BasicError.js");
 const NotFoundError = require("../errors/NotFoundError.js");
 const moment = require("moment-timezone");
@@ -11,9 +11,25 @@ class TaskControllers {
     }
 
     async getAllTasks(req, res, next) {
-        const userId = req.user; 
+        const userId = req.user;
+        let where = {
+            userId,
+            start: {
+                [Op.gte]:moment.tz("America/Sao_Paulo").set({hour:0,minute:0,second:0,millisecond:0}).format(),
+                [Op.lte]:moment.tz("America/Sao_Paulo").add(5,"days").set({hour:0,minute:0,second:0,millisecond:0}).format()
+            }
+        };
+        console.log(where);
         try {
-            const taskList = await this.taskServices.getTasksFromUser(userId);
+            const {startIn} = req.query;
+            if(startIn != null){
+                where.start ={
+                    [Op.gte]:moment.tz(startIn,"America/Sao_Paulo").format(),
+                    [Op.lte]:moment.tz(startIn,  "America/Sao_paulo").add(6,"days").format()
+                };
+            }
+            console.log(where);
+            const taskList = await this.taskServices.getTasksFromUser(where);
             return res.status(200).json(taskList);
         } catch (error) {
             next(error);
@@ -36,7 +52,7 @@ class TaskControllers {
             if(start>end){
                 throw new BasicError("A data de inicio precisa ser menor que a data de termino", 403);
             }
-            await this.taskServices.create({title, start, end, description, userId});
+            await this.taskServices.create({title, start, end, description, userId: userId});
             return res.status(201).json({message: "Tarefa criada com sucesso!"});
         } catch (error) {
             next(error);
@@ -55,7 +71,7 @@ class TaskControllers {
             if(task.userId !== Number(userId)){
                 throw new BasicError("Você não pode atualizer essa tarefa", 403);
             }
-            
+
             const {title, description} = req.body;
             if(title){
                 taskUpdate.title=title;

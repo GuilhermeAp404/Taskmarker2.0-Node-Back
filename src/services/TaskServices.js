@@ -3,14 +3,10 @@ const Services = require("./Services.js");
 class TaskServices extends Services{
     constructor(){
         super("Task");
-        this.userServices = new Services("User");
     }
 
-    async getTasksFromUser(id){
-        const user = await this.userServices.getOneById(Number(id));
-        const userTaskList = await user.getTaskFromUser({
-            attributes:{exclude: ["userId", "createdAt", "updatedAt"]},
-        });
+    async getTasksFromUser(where={}){
+        const userTaskList = await this.getAll(where);
         return userTaskList;
     }
 }
