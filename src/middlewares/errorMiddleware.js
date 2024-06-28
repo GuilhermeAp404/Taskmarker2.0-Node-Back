@@ -9,6 +9,7 @@ const DatabaseError = require("../errors/DatabaseError.js");
 // eslint-disable-next-line no-unused-vars
 function errorMiddleware(error, req, res, next) {
     if(error instanceof Sequelize.ValidationError){
+        console.log(error);
         new ValidationError(error).sendError(res);
     }
     if(error instanceof Sequelize.DatabaseError){
@@ -24,7 +25,7 @@ function errorMiddleware(error, req, res, next) {
         new JWTInvalidError().sendError(res);
     }
     if(error instanceof TypeError){
-        new ValidationError().sendError(res);
+        new BasicError(error.message, 422).sendError(res);
     }
     if(error instanceof BasicError){
         error.sendError(res);
