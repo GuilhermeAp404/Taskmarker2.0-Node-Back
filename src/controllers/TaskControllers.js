@@ -27,7 +27,6 @@ class TaskControllers {
                     [Op.lte]:moment.tz(startIn,  "America/Sao_paulo").add(6,"days").format()
                 };
             }
-            console.log(where);
             const taskList = await this.taskServices.getTasksFromUser(where);
             return res.status(200).json(taskList);
         } catch (error) {
