@@ -7,6 +7,12 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 
 const app=express();
 
+const cors = require("cors");
+console.log(process.env.ORIGIN_URL);
+var corsOptions = {
+    origin: process.env.ORIGIN_URL,// some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 app.use(helmet());
 routes(app);
 app.use(notFoundMiddleware);

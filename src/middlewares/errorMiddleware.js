@@ -25,7 +25,7 @@ function errorMiddleware(error, req, res, next) {
         new JWTInvalidError().sendError(res);
     }
     if(error instanceof TypeError){
-        new BasicError(error.message, 422).sendError(res);
+        new BasicError(error.message, 500).sendError(res);
     }
     if(error instanceof BasicError){
         error.sendError(res);

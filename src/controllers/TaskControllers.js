@@ -19,7 +19,6 @@ class TaskControllers {
                 [Op.lte]:moment.tz("America/Sao_Paulo").add(5,"days").set({hour:0,minute:0,second:0,millisecond:0}).format()
             }
         };
-        console.log(where);
         try {
             const {startIn} = req.query;
             if(startIn != null){

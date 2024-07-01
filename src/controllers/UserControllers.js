@@ -54,7 +54,7 @@ class UserControllers{
             const {username, password} = req.body;
 
             if(!username){
-                throw new BasicError("O campo nome é necessário para o login");
+                throw new BasicError("O campo username é necessário para o login");
             }
 
             if(!password){
