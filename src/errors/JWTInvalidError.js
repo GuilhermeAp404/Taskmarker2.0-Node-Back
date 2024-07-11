@@ -1,7 +1,7 @@
 const BasicError = require("./BasicError.js");
 
 class JWTInvalidError extends BasicError{
-    constructor(message = "Acesso inválido"){
+    constructor(message = "Token inválido, tente novamente."){
         super(message, 401);
     }
 }
