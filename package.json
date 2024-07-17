@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
+    "dev": "set PORT=3333 && nodemon index.js",
+    "start":"node index.js",
     "prod": "node index.js"
   },
   "keywords": [],

@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
+        status:{
+            type: DataTypes.BOOLEAN,
+        },
         userId:{
             allowNull:false,
             type: DataTypes.INTEGER,

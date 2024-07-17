@@ -70,12 +70,15 @@ class TaskControllers {
                 throw new BasicError("Você não pode atualizer essa tarefa", 403);
             }
 
-            const {title, description} = req.body;
+            const {title, description, status} = req.body;
             if(title){
                 taskUpdate.title=title;
             }
             if(description){
                 taskUpdate.description=description;
+            }
+            if(status){
+                taskUpdate.status=status;
             }
 
             let {start, end} = req.body;
