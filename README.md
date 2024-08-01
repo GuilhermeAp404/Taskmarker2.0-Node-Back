@@ -60,7 +60,7 @@ Essa rota é utilizada para fazer o login dos usuários. As informações a segu
 
 ### Rota para trazer informações do usuário:
 ```http
-  GET /user/update
+  GET /user
 ```
 
 Rota criada para trazer informações dos usuários.
