@@ -15,20 +15,22 @@ class TaskControllers {
         let where = {
             userId,
             start: {
-                [Op.gte]:moment.tz("America/Sao_Paulo").set({hour:0,minute:0,second:0,millisecond:0}).format(),
-                [Op.lte]:moment.tz("America/Sao_Paulo").add(5,"days").set({hour:0,minute:0,second:0,millisecond:0}).format()
-            }
+                [Op.gte]:moment.utc().set({hour:0,minute:0,second:0,millisecond:0}).format(),
+                [Op.lte]:moment.utc().add(6,"days").set({hour:0,minute:0,second:0,millisecond:0}).format()
+            },
         };
+
         try {
             const {startIn} = req.query;
             if(startIn != null){
                 where.start ={
-                    [Op.gte]:moment.tz(startIn,"America/Sao_Paulo").format(),
-                    [Op.lte]:moment.tz(startIn,  "America/Sao_paulo").add(6,"days").format()
+                    [Op.gte]:moment.utc(startIn).set({hour:0,minute:0,second:0,millisecond:0}).format(),
+                    [Op.lte]:moment.utc(startIn).add(6,"days").set({hour:0,minute:0,second:0,millisecond:0}).format()
                 };
             }
-            const taskList = await this.taskServices.getTasksFromUser(where);
-            return res.status(200).json(taskList);
+            const order =[['start', 'ASC']]
+            const taskList = await this.taskServices.getTasksFromUser(where, order);
+            return res.status(200).json({tasks: taskList});
         } catch (error) {
             next(error);
         }
@@ -45,8 +47,8 @@ class TaskControllers {
             if(!end){
                 throw new BasicError("O campo da data de término precisa ser preenchido", 400);
             }
-            start = moment.tz(start,  "America/Sao_paulo").format();
-            end = moment.tz(end,  "America/Sao_paulo").format();
+            start = moment.utc(start).format();
+            end = moment.utc(end).format();
             if(start>end){
                 throw new BasicError("A data de inicio precisa ser menor que a data de termino", 403);
             }
@@ -83,10 +85,10 @@ class TaskControllers {
 
             let {start, end} = req.body;
             if(start){
-                taskUpdate.start = moment.tz(start,  "America/Sao_paulo").format();
+                taskUpdate.start = moment.utc(start).format();
             }
             if(end){
-                taskUpdate.end = moment.tz(end,  "America/Sao_paulo").format();
+                taskUpdate.end = moment.utc(end).format();
             }
             if(start>end){
                 throw new BasicError("A data de inicio precisa ser menor que a data de termino", 403);

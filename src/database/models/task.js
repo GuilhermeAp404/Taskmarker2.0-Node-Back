@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         status:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.STRING,
+            defaultValue: "OPEN"
         },
         userId:{
             allowNull:false,

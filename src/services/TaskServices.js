@@ -5,8 +5,8 @@ class TaskServices extends Services{
         super("Task");
     }
 
-    async getTasksFromUser(where={}){
-        const userTaskList = await this.getAll(where);
+    async getTasksFromUser(where={}, order=[]){
+        const userTaskList = await this.getAll(where, order);
         return userTaskList;
     }
 }

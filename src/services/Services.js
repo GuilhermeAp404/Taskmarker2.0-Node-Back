@@ -5,8 +5,8 @@ class Services {
         this.model = modelName;
     }
 
-    async getAll(where={}){
-        return await dataSource[this.model].findAll({where:{...where}});
+    async getAll(where={}, order=[]){
+        return await dataSource[this.model].findAll({where:{...where}, order:order});
     }
 
     async getOneById(id){
