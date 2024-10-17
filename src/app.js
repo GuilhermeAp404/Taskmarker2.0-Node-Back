@@ -8,7 +8,7 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 const app=express();
 
 const cors = require("cors");
-app.use(cors({origin:['http://localhost:3333', process.env.ORIGIN_URL]}));
+app.use(cors({origin:'*'}));
 
 app.use(helmet());
 
