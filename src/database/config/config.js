@@ -1,11 +1,9 @@
-const {DB_USERNAME, DB_PASS, DB_DATABASE, DB_HOST, DB_PORT, DB_DIALECT}=process.env
-
+require('dotenv').config()
 module.exports = {
-    "username": DB_USERNAME,
-    "password": DB_PASS,
-    "database": DB_DATABASE,
-    "host": DB_HOST,
-    "port": DB_PORT,
-    "dialect": DB_DIALECT,
-    "ssl":true
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_DATABASE,
+    "host": process.env.DB_HOST,
+    "port": process.env.DB_PORT,
+    "dialect": 'mysql',
 };
