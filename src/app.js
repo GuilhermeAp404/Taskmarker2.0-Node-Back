@@ -8,7 +8,10 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 const app=express();
 
 const cors = require("cors");
-app.use(cors({origin:'*'}));
+app.use(cors({
+    origin:[process.env.ORIGIN_URL],
+    methods:['GET', 'PUT', 'POST', 'DELETE']
+}));
 
 app.use(helmet());
 
