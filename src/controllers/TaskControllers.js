@@ -52,8 +52,8 @@ class TaskControllers {
             if(start>end){
                 throw new BasicError("A data de inicio precisa ser menor que a data de termino", 403);
             }
-            await this.taskServices.create({title, start, end, description, userId: userId});
-            return res.status(201).json({message: "Tarefa criada com sucesso!"});
+            const task = await this.taskServices.create({title, start, end, description, userId: userId});
+            return res.status(201).json({message: "Tarefa criada com sucesso!", task: task});
         } catch (error) {
             next(error);
         }
